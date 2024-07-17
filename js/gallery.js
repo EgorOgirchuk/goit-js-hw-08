@@ -67,20 +67,24 @@ const images = [
 const gallery = document.querySelector("ul.gallery");
 
 const imagesElement = images.forEach((image) => {
-  gallery.innerHTML += `<li><a><img style="width:360px" src="${image.preview}" alt="${image.description}" data-origin="${image.original}" class="gallery-img"/></a></li>`;
+  gallery.innerHTML += `<li><a href="${image.original}"> <img style="width:360px" 
+  src="${image.preview}" 
+  alt="${image.description}" 
+  data-source="${image.original}" 
+  class="gallery-img"/>
+  </a>
+  </li>`;
 });
 const galleryImg = document.querySelector(".gallery");
 
 galleryImg.addEventListener("click", (event) => {
   event.preventDefault();
-
-  console.log(event);
-
-  let target1 = event.target;
-  const originImage = target1.dataset.origin;
   if (event.target === event.currentTarget) {
     return;
   }
+  let target1 = event.target;
+  const originImage = target1.dataset.source;
+
   const instance = basicLightbox.create(`<img src="${originImage}"/>`);
   instance.show();
 });
